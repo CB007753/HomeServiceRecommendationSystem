@@ -12,7 +12,7 @@ class User(db.Model, UserMixin):
     hired_user = db.relationship('HiredUser')
 
 
-class HiredUser(db.Model, UserMixin):
+class HiredUser(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150))
     nic = db.Column(db.String(150))
@@ -32,3 +32,18 @@ class Note(db.Model):
     data = db.Column(db.String(10000))
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+
+class Plumbers(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150))
+    nic = db.Column(db.String(150))
+    address = db.Column(db.String(500))
+    city_of_work = db.Column(db.String(150))
+    telephone = db.Column(db.Integer)
+    occupation = db.Column(db.String(150))
+    work = db.Column(db.String(150))
+    years_of_experience = db.Column(db.Integer)
+    age_group = db.Column(db.String(150))
+    nvq_level = db.Column(db.String(150))
+
