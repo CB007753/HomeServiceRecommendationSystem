@@ -25,7 +25,7 @@ def login():
 
         else:
             flash('User does not exist.', category='error')
-    return render_template("login.html")
+    return render_template("login.html", user=current_user)
 
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
@@ -57,7 +57,7 @@ def sign_up():
             db.session.commit()
             flash('Successfully signed up.', category='success')
 
-    return render_template("sign_up.html")
+    return render_template("sign_up.html", user=current_user)
 
 
 @auth.route('/logout')
