@@ -1,24 +1,34 @@
 {% extends 'base.html' %}
-
+{% block title %}Notification{% endblock %}
 {% block content %}
+<div style="background-color: #ECFFDC">
+
 
 <h1 align="center">Notification</h1>
-<ul class="list-group list-group-flush" id="notes">
+<ul class="list-group list-group-flush " id="notes">
 
   {% for note in user.notes %}
+<div align="center">
+  <li class="list-group-item text-dark bg-warning" style="width: 500px; border-radius: 25px;">
+<b>
 
-  <li class="list-group-item">
+     {{ note.data }}
 
-    {{ note.data }}
+</b>
 
     <button type="button" class="close" onClick="deleteNote({{ note.id }})">
       <span aria-hidden="true">&times;</span>
     </button>
   </li>
+</div>
+
 
   {% endfor %}
 
 </ul>
+
+
+</div>
 
 
 

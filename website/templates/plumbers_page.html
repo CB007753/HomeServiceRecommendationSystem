@@ -1,36 +1,58 @@
 {% extends 'base.html' %}
-
+{% block title %}Plumbers{% endblock %}
 {% block content %}
 <div style="background-color: #ECFFDC">
 
 
+<div align="center" class="card-header text-dark  column">
+  <h1><b>Plumbers</b></h1>
+ <a href="/plumbers" class="btn btn-warning" style="border-radius: 15px">Recommend Based On Your City</a>
+</div>
 
-<h1 align="center">Plumbers</h1>
+  <br>
 
 
+<!---->
+  <div align="center">
 
-    <div class="card text-white bg-secondary border-warning">
-  {% for plumber in plumbers %}
+    <div align="center" class="row row-cols-1 row-cols-md-3 g-4">
 
-  <h5 class="card-header bg-dark">{{ plumber.name }}</h5>
+{% for plumber in plumbers %}
+  <div class="col">
+    <div class="card bg-secondary text-white h-100" style="width: 360px; border-radius: 30px">
+
+<!--      -->
+      <h5 class="card-header bg-dark" style="border-radius: 30px"><b>{{ plumber.name }}</b></h5>
   <div class="card-body">
     <h5 class="card-title">{{ plumber.work }}</h5>
-    <p class="card-text"><b>Working City :</b> {{ plumber.city_of_work }}</p>
-    <p class="card-text"><b>Experience :</b> {{ plumber.years_of_experience }} years</p>
-    <p class="card-text"><b>Qualification :</b> NVQ {{ plumber.nvq_level }}</p>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Working City :</b> {{ plumber.city_of_work }}</p>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Experience :</b> {{ plumber.years_of_experience }} years</p>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Qualification :</b> NVQ {{ plumber.nvq_level }}</p>
 
-      <div class="card-footer bg-transparent border-dark">
-        <div align="right"><a href="#" class="btn btn-warning">Hire Me</a></div>
+      <div class="card-footer bg-transparent border-white-50">
+        <div align="center"><a href="#" class="btn btn-warning" style="border-radius: 15px">Hire Me</a></div>
       </div>
+
+
+  </div>
+<!--      -->
+
+    </div>
+
+    </div>
+
+  {% endfor %}
+
+
+  </div>
+
   </div>
 
 
 
-  {% endfor %}
-
-</div>
+  </div>
 
 
-</div>
+
 
 {% endblock %}
