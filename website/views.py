@@ -28,5 +28,16 @@ def delete_note():
             from . import db
             db.session.delete(note)
             db.session.commit()
+            flash('Notification Deleted', category='success')
+        else:
+            flash('Notification couldn\'t be deleted', category='error')
 
     return jsonify({})
+
+
+@views.route('/plumbers', methods=['GET', 'POST'])
+@login_required
+def plumbers():
+    from .models import Plumbers
+    plumbers = Plumbers.query.all()
+    return render_template("plumbers_page.html", user=current_user, plumbers=plumbers)

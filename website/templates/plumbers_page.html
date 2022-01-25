@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="background-color: #ECFFDC">
+
+
+
+<h1 align="center">Plumbers</h1>
+
+
+
+    <div class="card text-white bg-secondary border-warning">
+  {% for plumber in plumbers %}
+
+  <h5 class="card-header bg-dark">{{ plumber.name }}</h5>
+  <div class="card-body">
+    <h5 class="card-title">{{ plumber.work }}</h5>
+    <p class="card-text"><b>Working City :</b> {{ plumber.city_of_work }}</p>
+    <p class="card-text"><b>Experience :</b> {{ plumber.years_of_experience }} years</p>
+    <p class="card-text"><b>Qualification :</b> NVQ {{ plumber.nvq_level }}</p>
+
+      <div class="card-footer bg-transparent border-dark">
+        <div align="right"><a href="#" class="btn btn-warning">Hire Me</a></div>
+      </div>
+  </div>
+
+
+
+  {% endfor %}
+
+</div>
+
+
+</div>
+
+{% endblock %}
