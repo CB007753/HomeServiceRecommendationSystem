@@ -41,3 +41,9 @@ def plumbers():
     from .models import Plumbers
     plumbers = Plumbers.query.all()
     return render_template("plumbers_page.html", user=current_user, plumbers=plumbers)
+
+
+@views.route('/view-profile', methods=['GET', 'POST'])
+@login_required
+def view_profile():
+    return render_template("profile_page.html", user=current_user)
