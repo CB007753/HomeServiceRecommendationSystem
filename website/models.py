@@ -21,7 +21,7 @@ class HiredUser(db.Model):
     work = db.Column(db.String(150))
     status = db.Column(db.String(150))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    plumber_id = db.Column(db.Integer, db.ForeignKey('plumber.id'))
+    plumber_id = db.Column(db.Integer, db.ForeignKey('plumbers.id'))
 
 
 class Note(db.Model):

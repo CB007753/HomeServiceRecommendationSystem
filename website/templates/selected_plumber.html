@@ -2,7 +2,7 @@
 {% block title %}Plumbers{% endblock %}
 
 {% block content %}
-
+<h3 class="card-header text-white bg-secondary">Confirm Your Hiring (You can't revert back)</h3>
 <div class="container emp-profile" style="padding-top: 30px">
             <form method="post">
                 <div class="row">
@@ -12,6 +12,7 @@
                                     <h3>
                                       <b>{{ plumber.name }}</b>
                                     </h3>
+                            {% set plumber_id=plumber.id %}
                                     <h6>
                                         {{ plumber.city_of_work }}
                                     </h6>
@@ -27,7 +28,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <a href="#" class="btn btn-warning" style="border-radius: 15px">Hire Me</a>
+                        <a href="{{ url_for('views.hire_me', record_id = plumber_id) }}" class="btn btn-warning" style="border-radius: 15px">Hire Me</a>
                     </div>
 
                 </div>
@@ -89,7 +90,7 @@
             </form>
         </div>
 <br>
-<h1 class="card-header text-white bg-secondary">Recommended For You</h1>
+<h2 class="card-header text-white bg-secondary">Recommended For You</h2>
 
 
 
