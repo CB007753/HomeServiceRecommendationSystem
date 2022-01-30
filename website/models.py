@@ -8,6 +8,8 @@ class User(db.Model, UserMixin):
     fullname = db.Column(db.String(150))
     email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
+    city = db.Column(db.String(150))
+    address = db.Column(db.String(300))
     notes = db.relationship('Note')
     hired_user = db.relationship('HiredUser')
 

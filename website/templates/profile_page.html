@@ -14,7 +14,7 @@
                                       <b>{{ user.fullname }}</b>
                                     </h3>
                                     <h6>
-                                        Colombo
+                                        {{ user.city }}
                                     </h6>
 
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -60,7 +60,16 @@
                                                 <label><b>City</b></label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Colombo</p>
+                                                <p>{{ user.city }}</p>
+                                            </div>
+                                        </div>
+
+                                <div class="row">
+                                            <div class="col-md-6">
+                                                <label><b>Address</b></label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ user.address }}</p>
                                             </div>
                                         </div>
                             </div>
