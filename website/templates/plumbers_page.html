@@ -23,6 +23,7 @@
 
 <!--      -->
       <h5 class="card-header bg-dark" style="border-radius: 30px"><b>{{ plumber.name }}</b></h5>
+      {% set plumber_id=plumber.id %}
   <div class="card-body">
     <h5 class="card-title">{{ plumber.work }}</h5>
     <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Working City :</b> {{ plumber.city_of_work }}</p>
@@ -30,7 +31,9 @@
     <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Qualification :</b> NVQ {{ plumber.nvq_level }}</p>
 
       <div class="card-footer bg-transparent border-white-50">
-        <div align="center"><a href="#" class="btn btn-warning" style="border-radius: 15px">Hire Me</a></div>
+        <div align="center">
+          <a href="{{ url_for('views.view_plumber_details', record_id = plumber_id) }}" class="btn btn-warning" style="border-radius: 15px">Hire Me</a>
+        </div>
       </div>
 
 

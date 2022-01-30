@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block title %}Plumbers{% endblock %}
+
+{% block content %}
+
+<div class="container emp-profile" style="padding-top: 30px">
+            <form method="post">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h3>
+                                      <b>{{ plumber.name }}</b>
+                                    </h3>
+                                    <h6>
+                                        {{ plumber.city_of_work }}
+                                    </h6>
+
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Details</a>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <a href="#" class="btn btn-warning" style="border-radius: 15px">Hire Me</a>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-md-8" style="padding-top: 5px; padding-left: 32px">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label><b>Occupation</b></label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ plumber.occupation }}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label><b>Work</b></label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ plumber.work }}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label><b>Experience</b></label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ plumber.years_of_experience }} Years</p>
+                                            </div>
+                                        </div>
+
+                                <div class="row">
+                                            <div class="col-md-6">
+                                                <label><b>Age Group</b></label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ plumber.age_group }}</p>
+                                            </div>
+                                        </div>
+
+                                <div class="row">
+                                            <div class="col-md-6">
+                                                <label><b>NVQ Level</b></label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ plumber.nvq_level }}</p>
+                                            </div>
+                                        </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+<br>
+<h1 class="card-header text-white bg-secondary">Recommended For You</h1>
+
+
+
+{% endblock %}

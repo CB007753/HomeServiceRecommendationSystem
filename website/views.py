@@ -47,3 +47,11 @@ def plumbers():
 @login_required
 def view_profile():
     return render_template("profile_page.html", user=current_user)
+
+
+@views.route('/view-plumber-details/<int:record_id>', methods=['GET', 'POST'])
+@login_required
+def view_plumber_details(record_id):
+    from .models import Plumbers
+    selected_plumber = Plumbers.query.get(record_id)
+    return render_template("selected_plumber.html", user=current_user, plumber=selected_plumber)
