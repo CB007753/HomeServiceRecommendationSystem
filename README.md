@@ -1,5 +1,5 @@
 # HomeServiceRecommendationSystem
-This is a service provider hiring website which will also recommend service providers to the user
+This is a service provider hiring website which will also recommend service providers to the user based on the service provider the user hires and based on the city of the user.
 
 The website is built using html5 and designed using bootstrap and javascript
 back end of this application is developed using python 3
