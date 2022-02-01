@@ -32,6 +32,7 @@ class HiredHistory(db.Model):
     status = db.Column(db.String(150))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     plumber_id = db.Column(db.Integer, db.ForeignKey('plumbers.id'))
+    date = db.Column(db.String(150))
 
 
 class Note(db.Model):

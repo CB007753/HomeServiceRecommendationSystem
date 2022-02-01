@@ -91,11 +91,11 @@ def hire_me(record_id):
             notifications = Note(data=data, date=now, user_id=user_id)
             db.session.add(notifications)
             db.session.commit()
-            flash(name + ' is hired successfully, check Current Hiring for more details.', category='success')
+            flash(name + ' is hired successfully.', category='success')
     except Exception as e:
         print(e)
 
-    return render_template("selected_plumber.html", user=current_user, plumber=hired_plumber)
+    return redirect(url_for("views.current_hiring"))
 
 
 @views.route('/current-hiring', methods=['GET', 'POST'])
@@ -173,9 +173,10 @@ def work_completed(record_id):
 
         if user_id == current_user.id:
             from . import db
+            formated_date = now.strftime("%d/%m/%Y %H:%M:%S")
             # Adding hiring to completed hiring list
             new_entry = HiredHistory(name=name, telephone=telephone, work=work, status=status,
-                                     user_id=user_id, plumber_id=plumber_id)
+                                     user_id=user_id, plumber_id=plumber_id, date=formated_date)
             db.session.add(new_entry)
             db.session.commit()
 

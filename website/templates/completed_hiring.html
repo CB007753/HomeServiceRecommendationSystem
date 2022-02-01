@@ -7,15 +7,24 @@
      <h1 class="card-header text-white bg-secondary">Your Hired History</h1>
 
   <br>
-{% for plumber in hired %}
+<div align="center">
+
+    <div align="center" class="row row-cols-1 row-cols-md-3 g-4">
+
+
+
+      {% for plumber in hired %}
     {% if plumber.user_id==user.id  %}
-  <div class="card-group border-dark"  style="width: 320px;">
+      <div class="col">
+
+
+        <div class="card-group border-dark"  style="width: 320px;">
 
 
   <div class="card" style="border-radius: 20px; border-color: yellowgreen">
 
     <div align="center">
-          <img src="https://www.proxims-barcelona.com/wp-content/uploads/2021/06/plumber.jpg" style="width: 300px; height: 200px; padding-top: 5px; border-radius: 15px" class="card-img-top" alt="...">
+          <img src="https://1eozh3q70fp16zmk31vlucb1-wpengine.netdna-ssl.com/wp-content/uploads/2018/04/Six-Major-Reasons-Why-You-Should-Hire-a-Professional-Plumber-in-Georgetown-SC-1024x683.jpg" style="width: 300px; height: 200px; padding-top: 5px; border-radius: 15px" class="card-img-top" alt="...">
     </div>
     {% set plumber_id=plumber.id %}
     <div class="card-body">
@@ -31,10 +40,22 @@
     </div>
 
   </div>
+    </div>
+
+
+
+      </div>
+
     {% endif %}
     {% endfor %}
 
-</div>
+
+
+
+    </div>
+  </div>
+
+
 <br>
 </div>
 
