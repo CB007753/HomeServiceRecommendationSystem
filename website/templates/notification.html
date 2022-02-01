@@ -7,7 +7,7 @@
 <h1 align="center">Notification</h1>
 <ul class="list-group list-group-flush " id="notes">
 
-  {% for note in user.notes %}
+  {% for note in user.notes|sort(attribute='id', reverse = True) %}
 <div align="center">
   <li class="list-group-item text-dark bg-warning" style="width: 500px; border-radius: 25px;">
 <b>
