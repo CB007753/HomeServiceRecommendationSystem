@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify, flash
+from flask import Blueprint, render_template, request, jsonify, flash, redirect, url_for
 from flask_login import login_required, current_user
 import json
 
@@ -84,13 +84,14 @@ def hire_me(record_id):
                   category='error')
         else:
             from . import db
-            new_hired_plumber = HiredUser(name=name, telephone=telephone, work=work, status=status, user_id=user_id, plumber_id=plumber_id)
+            new_hired_plumber = HiredUser(name=name, telephone=telephone, work=work, status=status, user_id=user_id,
+                                          plumber_id=plumber_id)
             db.session.add(new_hired_plumber)
             db.session.commit()
             notifications = Note(data=data, date=now, user_id=user_id)
             db.session.add(notifications)
             db.session.commit()
-            flash(name+' is hired successfully, check Current Hiring for more details.', category='success')
+            flash(name + ' is hired successfully, check Current Hiring for more details.', category='success')
     except Exception as e:
         print(e)
 
@@ -111,3 +112,36 @@ def view_hired_plumber_details(record_id):
     from .models import Plumbers
     details_of_hired_plumber = Plumbers.query.get(record_id)
     return render_template("view_details_hired_plumber.html", user=current_user, plumber=details_of_hired_plumber)
+
+
+@views.route('/update-arrived/<int:record_id>', methods=['GET', 'POST'])
+@login_required
+def update_arrived(record_id):
+    try:
+        from .models import HiredUser, Note
+        details_of_hired_plumber = HiredUser.query.get(record_id)
+        name = details_of_hired_plumber.name
+        status = 'Arrived'
+        data = name + ' has arrived at your location. Make sure to click work completed once the work is done'
+        import datetime
+        now = datetime.datetime.now()
+        user_id = current_user.id
+
+        from . import db
+        details_of_hired_plumber.status = status
+        db.session.commit()
+
+        notifications = Note(data=data, date=now, user_id=user_id)
+        db.session.add(notifications)
+        db.session.commit()
+
+        flash(name + " has arrived at your location.",
+              category="success")
+        flash("Make sure to click work completed button once the work is done.",
+              category="success")
+
+    except Exception as e:
+        flash("Something went wrong !", category="error")
+        print(e)
+
+    return redirect(url_for("views.current_hiring"))
