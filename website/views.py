@@ -109,14 +109,10 @@ def current_hiring():
 @views.route('/details-of-hired-plumber/<int:record_id>', methods=['GET', 'POST'])
 @login_required
 def view_hired_plumber_details(record_id):
-    from .models import Plumbers, HiredUser, HiredHistory
-    try:
-        status_of_hired_plumber = HiredUser.query.get(record_id)
-        plumber_id = status_of_hired_plumber.plumber_id
+    from .models import Plumbers, HiredUser
 
-    except:
-        status_of_hired_plumber = HiredHistory.query.get(record_id)
-        plumber_id = status_of_hired_plumber.plumber_id
+    status_of_hired_plumber = HiredUser.query.get(record_id)
+    plumber_id = status_of_hired_plumber.plumber_id
 
     details_of_hired_plumber = Plumbers.query.get(plumber_id)
     return render_template("view_details_hired_plumber.html", user=current_user, plumber=details_of_hired_plumber,
@@ -170,6 +166,11 @@ def work_completed(record_id):
         user_id = details_of_hired_plumber.user_id
         plumber_id = details_of_hired_plumber.plumber_id
 
+        data = name + ' has completed his service. You can make the payment now'
+        import datetime
+        now = datetime.datetime.now()
+        user_id_2 = current_user.id
+
         if user_id == current_user.id:
             from . import db
             # Adding hiring to completed hiring list
@@ -181,7 +182,12 @@ def work_completed(record_id):
             # Deleting the hiring from hired user table so the user can hire another service provider.
             db.session.delete(details_of_hired_plumber)
             db.session.commit()
-            flash(name + ' has completed his service, Please pay the service amount requested by the plumber',
+
+            notifications = Note(data=data, date=now, user_id=user_id_2)
+            db.session.add(notifications)
+            db.session.commit()
+            flash(name + ' has completed his service', category='success')
+            flash('Please pay the service amount requested by the plumber',
                   category='success')
 
         else:
@@ -200,3 +206,16 @@ def hired_history():
     from .models import HiredHistory
     hired_plumber_history = HiredHistory.query.all()
     return render_template("completed_hiring.html", user=current_user, hired=hired_plumber_history)
+
+
+@views.route('/details-of-hired-plumber-history/<int:record_id>', methods=['GET', 'POST'])
+@login_required
+def view_hired_plumber_history_details(record_id):
+    from .models import Plumbers, HiredHistory
+
+    status_of_hired_plumber = HiredHistory.query.get(record_id)
+    plumber_id = status_of_hired_plumber.plumber_id
+
+    details_of_hired_plumber = Plumbers.query.get(plumber_id)
+    return render_template("view_details_hired_plumber_history.html", user=current_user,
+                           plumber=details_of_hired_plumber, hired_plumber=status_of_hired_plumber)
