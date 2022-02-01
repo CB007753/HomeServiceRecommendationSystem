@@ -24,6 +24,16 @@ class HiredUser(db.Model):
     plumber_id = db.Column(db.Integer, db.ForeignKey('plumbers.id'))
 
 
+class HiredHistory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150))
+    telephone = db.Column(db.String(150))
+    work = db.Column(db.String(150))
+    status = db.Column(db.String(150))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    plumber_id = db.Column(db.Integer, db.ForeignKey('plumbers.id'))
+
+
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.String(10000))

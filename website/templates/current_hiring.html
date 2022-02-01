@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div align="center" style="background-color: #ECFFDC">
+
+     <h1 class="card-header text-white bg-secondary">Your Current Hiring</h1>
+
+  <br>
+
+  <div class="card-group border-dark"  style="width: 320px;">
+
+{% for plumber in hired %}
+    {% if plumber.user_id==user.id  %}
+  <div class="card" style="border-radius: 20px; border-color: yellowgreen">
+
+    <div align="center">
+          <img src="https://www.victoryhvac.com/blog/wp-content/uploads/2016/03/plumbing2.jpg" style="width: 300px; height: 200px; padding-top: 5px; border-radius: 15px" class="card-img-top" alt="...">
+    </div>
+
+    <div class="card-body">
+      <h5 class="card-header text-white bg-dark" style="border-radius: 25px">{{ plumber.name }}</h5>
+      <h6 class="card-text"><b>{{ plumber.work }}</b></h6>
+      <p class="card-text"><b>{{ plumber.status }}</b></p>
+    </div>
+    {% set plumber_id=plumber.plumber_id %}
+    <div class="card-footer row-cols-1">
+      <a href="{{ url_for('views.view_hired_plumber_details', record_id = plumber_id) }}" class="btn btn-warning" style="border-radius: 15px">View Complete Details</a>
+    </div>
+    {% if plumber.status=='On The Way' %}
+    <div class="card-footer row-cols-2">
+      <a href="#" class="btn btn-warning" style="border-radius: 15px;">Plumber Arrived</a>
+    </div>
+    {% else %}
+    <div class="card-footer row-cols-2">
+      <a href="#" class="btn btn-warning" style="border-radius: 15px">Work Completed</a>
+    </div>
+    {%endif%}
+  </div>
+    {% endif %}
+    {% endfor %}
+
+</div>
+<br>
+</div>
+
+
+{% endblock %}

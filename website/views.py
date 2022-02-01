@@ -72,7 +72,6 @@ def hire_me(record_id):
         status = 'On The Way'
         plumber_id = hired_plumber.id
         user_id = current_user.id
-        already_hired = HiredUser.user_id
         data = name + ' is hired, he will be on the way.'
 
         from .models import HiredUser, User
@@ -96,3 +95,19 @@ def hire_me(record_id):
         print(e)
 
     return render_template("selected_plumber.html", user=current_user, plumber=hired_plumber)
+
+
+@views.route('/current-hiring', methods=['GET', 'POST'])
+@login_required
+def current_hiring():
+    from .models import HiredUser
+    current_hired_user = HiredUser.query.all()
+    return render_template("current_hiring.html", user=current_user, hired=current_hired_user)
+
+
+@views.route('/details-of-hired-plumber/<int:record_id>', methods=['GET', 'POST'])
+@login_required
+def view_hired_plumber_details(record_id):
+    from .models import Plumbers
+    details_of_hired_plumber = Plumbers.query.get(record_id)
+    return render_template("view_details_hired_plumber.html", user=current_user, plumber=details_of_hired_plumber)

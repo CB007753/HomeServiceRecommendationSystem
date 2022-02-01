@@ -30,7 +30,7 @@
  <div class="p-5 bg-secondary text-dark text-center" style="background-image: url('https://t4.ftcdn.net/jpg/03/19/42/81/360_F_319428111_USTiZcezvxF4UVR5O2r1Er1fCnVySR7n.jpg');">
 
       <h1><i><b>Home Service Providers</b></i></h1>
-     <p><b>Click Once And You Will Never Regret! !</b></p>
+     <p><b>The quality you expect, the service you deserve !</b></p>
     </div>
 
 <!--Nav bar-->
@@ -49,7 +49,7 @@
 
             {% if user.is_authenticated %}
           <a class="nav-item nav-link" id="home" href="/">Home</a>
-            <a class="nav-item nav-link" id="current_hires" href="#">Current Hiring</a>
+            <a class="nav-item nav-link" id="current_hires" href="/current-hiring">Current Hiring</a>
             <a class="nav-item nav-link" id="hire_history" href="#">Hiring History</a>
             <a class="nav-item nav-link" id="profile" href="/view-profile">View Profile</a>
             <a class="nav-item nav-link" id="notification" href="/notification">View Notifications</a>
@@ -100,11 +100,12 @@
 <!--Content of each page-->
 {% block content %}
 
+
 {% endblock %}
 <!--End of Content of each page-->
 
 
-
+<br><br><br>
 <!--Footer-->
 <div class="mt-5 p-5 bg-dark text-white text-center">
     <h5>Home Service Providers</h5>
