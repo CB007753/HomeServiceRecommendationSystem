@@ -109,9 +109,12 @@ def current_hiring():
 @views.route('/details-of-hired-plumber/<int:record_id>', methods=['GET', 'POST'])
 @login_required
 def view_hired_plumber_details(record_id):
-    from .models import Plumbers
-    details_of_hired_plumber = Plumbers.query.get(record_id)
-    return render_template("view_details_hired_plumber.html", user=current_user, plumber=details_of_hired_plumber)
+    from .models import Plumbers, HiredUser
+    status_of_hired_plumber = HiredUser.query.get(record_id)
+    plumber_id = status_of_hired_plumber.plumber_id
+
+    details_of_hired_plumber = Plumbers.query.get(plumber_id)
+    return render_template("view_details_hired_plumber.html", user=current_user, plumber=details_of_hired_plumber, hired_plumber=status_of_hired_plumber)
 
 
 @views.route('/update-arrived/<int:record_id>', methods=['GET', 'POST'])
