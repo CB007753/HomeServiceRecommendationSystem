@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div align="center" style="background-color: #ECFFDC">
+
+     <h1 class="card-header text-white bg-secondary">Your Hired History</h1>
+
+  <br>
+
+  <div class="card-group border-dark"  style="width: 320px;">
+
+{% for plumber in hired %}
+    {% if plumber.user_id==user.id  %}
+  <div class="card" style="border-radius: 20px; border-color: yellowgreen">
+
+    <div align="center">
+          <img src="https://www.proxims-barcelona.com/wp-content/uploads/2021/06/plumber.jpg" style="width: 300px; height: 200px; padding-top: 5px; border-radius: 15px" class="card-img-top" alt="...">
+    </div>
+    {% set plumber_id=plumber.id %}
+    <div class="card-body">
+      <h4 class="card-header text-white bg-dark" style="border-radius: 25px">{{ plumber.name }}</h4>
+      <h5 class="card-text"><b>{{ plumber.work }}</b></h5>
+        </div>
+
+    <div class="card-footer row-cols-1">
+        <p class="card-text" style="color: red; font-family: 'Helvetica', sans-serif; font-weight: lighter; font-size: 25px">{{ plumber.status }}</p>
+    </div>
+      <div class="card-footer row-cols-2">
+      <a href="{{ url_for('views.view_hired_plumber_details', record_id = plumber_id) }}" class="btn btn-warning" style="border-radius: 15px">View Details</a>
+    </div>
+
+  </div>
+    {% endif %}
+    {% endfor %}
+
+</div>
+<br>
+</div>
+
+
+{% endblock %}

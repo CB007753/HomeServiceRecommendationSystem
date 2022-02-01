@@ -109,12 +109,18 @@ def current_hiring():
 @views.route('/details-of-hired-plumber/<int:record_id>', methods=['GET', 'POST'])
 @login_required
 def view_hired_plumber_details(record_id):
-    from .models import Plumbers, HiredUser
-    status_of_hired_plumber = HiredUser.query.get(record_id)
-    plumber_id = status_of_hired_plumber.plumber_id
+    from .models import Plumbers, HiredUser, HiredHistory
+    try:
+        status_of_hired_plumber = HiredUser.query.get(record_id)
+        plumber_id = status_of_hired_plumber.plumber_id
+
+    except:
+        status_of_hired_plumber = HiredHistory.query.get(record_id)
+        plumber_id = status_of_hired_plumber.plumber_id
 
     details_of_hired_plumber = Plumbers.query.get(plumber_id)
-    return render_template("view_details_hired_plumber.html", user=current_user, plumber=details_of_hired_plumber, hired_plumber=status_of_hired_plumber)
+    return render_template("view_details_hired_plumber.html", user=current_user, plumber=details_of_hired_plumber,
+                           hired_plumber=status_of_hired_plumber)
 
 
 @views.route('/update-arrived/<int:record_id>', methods=['GET', 'POST'])
@@ -148,3 +154,49 @@ def update_arrived(record_id):
         print(e)
 
     return redirect(url_for("views.current_hiring"))
+
+
+@views.route('/work-completed/<int:record_id>', methods=['GET', 'POST'])
+@login_required
+def work_completed(record_id):
+    try:
+        from .models import HiredUser, HiredHistory, Note
+        details_of_hired_plumber = HiredUser.query.get(record_id)
+
+        name = details_of_hired_plumber.name
+        telephone = details_of_hired_plumber.telephone
+        work = details_of_hired_plumber.work
+        status = 'Completed'
+        user_id = details_of_hired_plumber.user_id
+        plumber_id = details_of_hired_plumber.plumber_id
+
+        if user_id == current_user.id:
+            from . import db
+            # Adding hiring to completed hiring list
+            new_entry = HiredHistory(name=name, telephone=telephone, work=work, status=status,
+                                     user_id=user_id, plumber_id=plumber_id)
+            db.session.add(new_entry)
+            db.session.commit()
+
+            # Deleting the hiring from hired user table so the user can hire another service provider.
+            db.session.delete(details_of_hired_plumber)
+            db.session.commit()
+            flash(name + ' has completed his service, Please pay the service amount requested by the plumber',
+                  category='success')
+
+        else:
+            flash('Sorry, we couldn\'t update the hiring as completed !', category='error')
+
+    except Exception as e:
+        print(e)
+        flash("Something went wrong !", category="error")
+
+    return redirect(url_for("views.hired_history"))
+
+
+@views.route('/hired-history', methods=['GET', 'POST'])
+@login_required
+def hired_history():
+    from .models import HiredHistory
+    hired_plumber_history = HiredHistory.query.all()
+    return render_template("completed_hiring.html", user=current_user, hired=hired_plumber_history)

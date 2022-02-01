@@ -3,7 +3,7 @@
 {% block content %}
 
 <div align="center" style="background-color: #ECFFDC">
-
+{% if hired!=null %}
      <h1 class="card-header text-white bg-secondary">Your Current Hiring</h1>
 
   <br>
@@ -33,12 +33,17 @@
     </div>
     {% else %}
     <div class="card-footer row-cols-2">
-      <a href="#" class="btn btn-warning" style="border-radius: 15px">Work Completed</a>
+      <a href="{{url_for('views.work_completed', record_id = plumber_id )}}" class="btn btn-warning" style="border-radius: 15px">Work Completed</a>
     </div>
     {%endif%}
   </div>
     {% endif %}
     {% endfor %}
+    {% else %}
+
+    <h1 class="card-header text-white bg-secondary">Your Current Hiring Is Empty</h1>
+
+    {% endif %}
 
 </div>
 <br>
