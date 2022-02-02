@@ -2,6 +2,8 @@ from flask import Blueprint, render_template, request, jsonify, flash, redirect,
 from flask_login import login_required, current_user
 import json
 
+from nltk.corpus import stopwords
+
 views = Blueprint('views', __name__)
 
 
@@ -220,3 +222,40 @@ def view_hired_plumber_history_details(record_id):
     details_of_hired_plumber = Plumbers.query.get(plumber_id)
     return render_template("view_details_hired_plumber_history.html", user=current_user,
                            plumber=details_of_hired_plumber, hired_plumber=status_of_hired_plumber)
+
+
+@views.route('/recommend-based-on-city', methods=['GET', 'POST'])
+@login_required
+def recommend_based_on_city():
+    from .models import CityEngine
+    loaded_engine = CityEngine.recommendations
+    from .models import Plumbers
+    city = current_user.city
+    id_1 = loaded_engine(city)[0][0]
+    id_2 = loaded_engine(city)[0][1]
+    id_3 = loaded_engine(city)[0][2]
+    id_4 = loaded_engine(city)[0][3]
+    id_5 = loaded_engine(city)[0][4]
+    id_6 = loaded_engine(city)[0][5]
+    id_7 = loaded_engine(city)[0][6]
+    id_8 = loaded_engine(city)[0][7]
+    id_9 = loaded_engine(city)[0][8]
+    id_10 = loaded_engine(city)[0][9]
+
+    recommended_plumber_1 = Plumbers.query.get(id_1)
+    recommended_plumber_2 = Plumbers.query.get(id_2)
+    recommended_plumber_3 = Plumbers.query.get(id_3)
+    recommended_plumber_4 = Plumbers.query.get(id_4)
+    recommended_plumber_5 = Plumbers.query.get(id_5)
+    recommended_plumber_6 = Plumbers.query.get(id_6)
+    recommended_plumber_7 = Plumbers.query.get(id_7)
+    recommended_plumber_8 = Plumbers.query.get(id_8)
+    recommended_plumber_9 = Plumbers.query.get(id_9)
+    recommended_plumber_10 = Plumbers.query.get(id_10)
+
+    return render_template("city_plumbers_recomendation.html", user=current_user,
+                           plumber_1=recommended_plumber_1, plumber_2=recommended_plumber_2,
+                           plumber_3=recommended_plumber_3, plumber_4=recommended_plumber_4,
+                           plumber_5=recommended_plumber_5, plumber_6=recommended_plumber_6,
+                           plumber_7=recommended_plumber_7, plumber_8=recommended_plumber_8,
+                           plumber_9=recommended_plumber_9, plumber_10=recommended_plumber_10)
