@@ -253,7 +253,7 @@ def recommend_based_on_city():
     recommended_plumber_9 = Plumbers.query.get(id_9)
     recommended_plumber_10 = Plumbers.query.get(id_10)
 
-    return render_template("city_plumbers_recomendation.html", user=current_user,
+    return render_template("city_plumbers_recommendation.html", user=current_user,
                            plumber_1=recommended_plumber_1, plumber_2=recommended_plumber_2,
                            plumber_3=recommended_plumber_3, plumber_4=recommended_plumber_4,
                            plumber_5=recommended_plumber_5, plumber_6=recommended_plumber_6,
