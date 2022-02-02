@@ -54,12 +54,16 @@ def view_profile():
 @views.route('/view-plumber-details/<int:record_id>', methods=['GET', 'POST'])
 @login_required
 def view_plumber_details(record_id):
-    from .models import Plumbers
+    from .models import Plumbers, WorkEngine, HiredUser
     selected_plumber = Plumbers.query.get(record_id)
+    name = selected_plumber.name
     plumber_work = selected_plumber.work
-    from .models import WorkEngine
-
     loaded_engine = WorkEngine.recommendations
+    h_user = HiredUser.query.filter_by(name=name).first()
+    if h_user:
+        status = 'On A Hire'
+    else:
+        status = 'Available'
 
     id_1 = loaded_engine(plumber_work)[0][0]
     id_2 = loaded_engine(plumber_work)[0][1]
@@ -78,7 +82,7 @@ def view_plumber_details(record_id):
     return render_template("selected_plumber.html", user=current_user, plumber=selected_plumber,
                            rec_plumber_1=recommended_plumber_1, rec_plumber_2=recommended_plumber_2,
                            rec_plumber_3=recommended_plumber_3, rec_plumber_4=recommended_plumber_4,
-                           rec_plumber_5=recommended_plumber_5, rec_plumber_6=recommended_plumber_6)
+                           rec_plumber_5=recommended_plumber_5, rec_plumber_6=recommended_plumber_6, status=status)
 
 
 @views.route('/hire-me/<int:record_id>', methods=['GET', 'POST'])
@@ -105,7 +109,7 @@ def hire_me(record_id):
         plumber_city = hired_plumber.city_of_work
         if h_user:
             flash(name + ' is already on hire.', category='error')
-            return redirect(url_for("views.current_hiring"))
+            return redirect(url_for("views.plumbers"))
         elif user:
             flash('A plumber has already been hired by you. Once the current hire is completed, you can hire more.',
                   category='error')

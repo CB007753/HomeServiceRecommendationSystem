@@ -82,6 +82,25 @@
                                                 <p>{{ plumber.nvq_level }}</p>
                                             </div>
                                         </div>
+                                {% if status == 'Available' %}
+                                <div class="row">
+                                            <div class="col-md-6">
+                                                <label style="color: green; font-family: 'Dubai Medium',sans-serif; font-size: 27px"><b>Status</b></label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p style="color: green; font-family: 'Dubai Medium',sans-serif; font-weight: bolder; font-size: 25px">{{ status }}</p>
+                                            </div>
+                                        </div>
+                                {% else %}
+                                <div class="row">
+                                            <div class="col-md-6">
+                                                <label style="color: red; font-family: 'Dubai Medium',sans-serif; font-size: 27px"><b>Status</b></label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p style="color: red; font-family: 'Dubai Medium',sans-serif; font-weight: bolder; font-size: 25px">{{ status }}</p>
+                                            </div>
+                                        </div>
+                                {% endif %}
                             </div>
 
                         </div>
