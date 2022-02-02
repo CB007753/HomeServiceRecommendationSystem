@@ -79,11 +79,20 @@ def hire_me(record_id):
         from .models import HiredUser, User
         h_user = HiredUser.query.filter_by(name=name).first()
         user = HiredUser.query.filter_by(user_id=user_id).first()
+        user_city = current_user.city
+        plumber_city = hired_plumber.city_of_work
         if h_user:
             flash(name + ' is already on hire.', category='error')
+            return redirect(url_for("views.current_hiring"))
         elif user:
             flash('A plumber has already been hired by you. Once the current hire is completed, you can hire more.',
                   category='error')
+            return redirect(url_for("views.current_hiring"))
+        elif user_city != plumber_city:
+            flash(name + ' is currently working in ' + plumber_city + ', you can only hire plumbers from ' + user_city +
+                  '.',
+                  category='error')
+            return redirect(url_for("views.plumbers"))
         else:
             from . import db
             new_hired_plumber = HiredUser(name=name, telephone=telephone, work=work, status=status, user_id=user_id,
@@ -94,10 +103,10 @@ def hire_me(record_id):
             db.session.add(notifications)
             db.session.commit()
             flash(name + ' is hired successfully.', category='success')
+            return redirect(url_for("views.current_hiring"))
     except Exception as e:
         print(e)
-
-    return redirect(url_for("views.current_hiring"))
+        return redirect(url_for("views.current_hiring"))
 
 
 @views.route('/current-hiring', methods=['GET', 'POST'])
