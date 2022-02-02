@@ -56,7 +56,29 @@ def view_profile():
 def view_plumber_details(record_id):
     from .models import Plumbers
     selected_plumber = Plumbers.query.get(record_id)
-    return render_template("selected_plumber.html", user=current_user, plumber=selected_plumber)
+    plumber_work = selected_plumber.work
+    from .models import WorkEngine
+
+    loaded_engine = WorkEngine.recommendations
+
+    id_1 = loaded_engine(plumber_work)[0][0]
+    id_2 = loaded_engine(plumber_work)[0][1]
+    id_3 = loaded_engine(plumber_work)[0][2]
+    id_4 = loaded_engine(plumber_work)[0][3]
+    id_5 = loaded_engine(plumber_work)[0][4]
+    id_6 = loaded_engine(plumber_work)[0][5]
+
+    recommended_plumber_1 = Plumbers.query.get(id_1)
+    recommended_plumber_2 = Plumbers.query.get(id_2)
+    recommended_plumber_3 = Plumbers.query.get(id_3)
+    recommended_plumber_4 = Plumbers.query.get(id_4)
+    recommended_plumber_5 = Plumbers.query.get(id_5)
+    recommended_plumber_6 = Plumbers.query.get(id_6)
+
+    return render_template("selected_plumber.html", user=current_user, plumber=selected_plumber,
+                           rec_plumber_1=recommended_plumber_1, rec_plumber_2=recommended_plumber_2,
+                           rec_plumber_3=recommended_plumber_3, rec_plumber_4=recommended_plumber_4,
+                           rec_plumber_5=recommended_plumber_5, rec_plumber_6=recommended_plumber_6)
 
 
 @views.route('/hire-me/<int:record_id>', methods=['GET', 'POST'])

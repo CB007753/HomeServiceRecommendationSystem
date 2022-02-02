@@ -89,9 +89,207 @@
                 </div>
             </form>
         </div>
+
+
+
+
 <br>
+
+
+
+
+
+<!--This section will display recommended plumbers-->
+
 <h2 class="card-header text-white bg-secondary">Recommended For You</h2>
+<br><br>
+<div align="center">
+
+    <div align="center" class="row row-cols-1 row-cols-md-3 g-4">
 
 
 
+        <!--    1st recommendation  -->
+  <div class="col">
+    <div class="card bg-secondary text-white h-100" style="width: 360px; border-radius: 30px">
+
+
+      <h5 class="card-header bg-dark" style="border-radius: 30px"><b>{{ rec_plumber_1.name }}</b></h5>
+      {% set plumber_id=rec_plumber_1.id %}
+  <div class="card-body">
+    <h5 class="card-title">{{ rec_plumber_1.work }}</h5>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Working City :</b> {{ rec_plumber_1.city_of_work }}</p>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Experience :</b> {{ rec_plumber_1.years_of_experience }} years</p>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Qualification :</b> NVQ {{ rec_plumber_1.nvq_level }}</p>
+
+      <div class="card-footer bg-transparent border-white-50">
+        <div align="center">
+          <a href="{{ url_for('views.view_plumber_details', record_id = plumber_id) }}" class="btn btn-warning" style="border-radius: 15px">Hire Me</a>
+        </div>
+      </div>
+
+
+  </div>
+
+
+    </div>
+
+    </div>
+<!--   end of 1st recommendation   -->
+
+<!---->
+
+<!--    2nd recommendation  -->
+  <div class="col">
+    <div class="card bg-secondary text-white h-100" style="width: 360px; border-radius: 30px">
+
+
+      <h5 class="card-header bg-dark" style="border-radius: 30px"><b>{{ rec_plumber_2.name }}</b></h5>
+      {% set plumber_id=rec_plumber_2.id %}
+  <div class="card-body">
+    <h5 class="card-title">{{ rec_plumber_2.work }}</h5>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Working City :</b> {{ rec_plumber_2.city_of_work }}</p>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Experience :</b> {{ rec_plumber_2.years_of_experience }} years</p>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Qualification :</b> NVQ {{ rec_plumber_2.nvq_level }}</p>
+
+      <div class="card-footer bg-transparent border-white-50">
+        <div align="center">
+          <a href="{{ url_for('views.view_plumber_details', record_id = plumber_id) }}" class="btn btn-warning" style="border-radius: 15px">Hire Me</a>
+        </div>
+      </div>
+
+
+  </div>
+
+
+    </div>
+
+    </div>
+<!--   end of 2nd recommendation   -->
+
+<!---->
+
+<!--    3rd recommendation  -->
+  <div class="col">
+    <div class="card bg-secondary text-white h-100" style="width: 360px; border-radius: 30px">
+
+
+      <h5 class="card-header bg-dark" style="border-radius: 30px"><b>{{ rec_plumber_3.name }}</b></h5>
+      {% set plumber_id=rec_plumber_3.id %}
+  <div class="card-body">
+    <h5 class="card-title">{{ rec_plumber_3.work }}</h5>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Working City :</b> {{ rec_plumber_3.city_of_work }}</p>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Experience :</b> {{ rec_plumber_3.years_of_experience }} years</p>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Qualification :</b> NVQ {{ rec_plumber_3.nvq_level }}</p>
+
+      <div class="card-footer bg-transparent border-white-50">
+        <div align="center">
+          <a href="{{ url_for('views.view_plumber_details', record_id = plumber_id) }}" class="btn btn-warning" style="border-radius: 15px">Hire Me</a>
+        </div>
+      </div>
+
+
+  </div>
+
+
+    </div>
+
+    </div>
+<!--   end of 3rd recommendation   -->
+
+<!---->
+
+ <!--    4th recommendation  -->
+  <div class="col">
+    <div class="card bg-secondary text-white h-100" style="width: 360px; border-radius: 30px">
+
+
+      <h5 class="card-header bg-dark" style="border-radius: 30px"><b>{{ rec_plumber_4.name }}</b></h5>
+      {% set plumber_id=rec_plumber_4.id %}
+  <div class="card-body">
+    <h5 class="card-title">{{ rec_plumber_4.work }}</h5>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Working City :</b> {{ rec_plumber_4.city_of_work }}</p>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Experience :</b> {{ rec_plumber_4.years_of_experience }} years</p>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Qualification :</b> NVQ {{ rec_plumber_4.nvq_level }}</p>
+
+      <div class="card-footer bg-transparent border-white-50">
+        <div align="center">
+          <a href="{{ url_for('views.view_plumber_details', record_id = plumber_id) }}" class="btn btn-warning" style="border-radius: 15px">Hire Me</a>
+        </div>
+      </div>
+
+
+  </div>
+
+
+    </div>
+
+    </div>
+<!--   end of 4th recommendation   -->
+
+<!---->
+
+  <!--    5th recommendation  -->
+  <div class="col">
+    <div class="card bg-secondary text-white h-100" style="width: 360px; border-radius: 30px">
+
+
+      <h5 class="card-header bg-dark" style="border-radius: 30px"><b>{{ rec_plumber_5.name }}</b></h5>
+      {% set plumber_id=rec_plumber_5.id %}
+  <div class="card-body">
+    <h5 class="card-title">{{ rec_plumber_5.work }}</h5>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Working City :</b> {{ rec_plumber_5.city_of_work }}</p>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Experience :</b> {{ rec_plumber_5.years_of_experience }} years</p>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Qualification :</b> NVQ {{ rec_plumber_5.nvq_level }}</p>
+
+      <div class="card-footer bg-transparent border-white-50">
+        <div align="center">
+          <a href="{{ url_for('views.view_plumber_details', record_id = plumber_id) }}" class="btn btn-warning" style="border-radius: 15px">Hire Me</a>
+        </div>
+      </div>
+
+
+  </div>
+
+
+    </div>
+
+    </div>
+<!--   end of 5th recommendation   -->
+
+ <!---->
+
+<!--    6th recommendation  -->
+  <div class="col">
+    <div class="card bg-secondary text-white h-100" style="width: 360px; border-radius: 30px">
+
+
+      <h5 class="card-header bg-dark" style="border-radius: 30px"><b>{{ rec_plumber_6.name }}</b></h5>
+      {% set plumber_id=rec_plumber_6.id %}
+  <div class="card-body">
+    <h5 class="card-title">{{ rec_plumber_6.work }}</h5>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Working City :</b> {{ rec_plumber_6.city_of_work }}</p>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Experience :</b> {{ rec_plumber_6.years_of_experience }} years</p>
+    <p class="card-text text-white-50 bg-dark" style="border-radius: 15px"><b>Qualification :</b> NVQ {{ rec_plumber_6.nvq_level }}</p>
+
+      <div class="card-footer bg-transparent border-white-50">
+        <div align="center">
+          <a href="{{ url_for('views.view_plumber_details', record_id = plumber_id) }}" class="btn btn-warning" style="border-radius: 15px">Hire Me</a>
+        </div>
+      </div>
+
+
+  </div>
+
+
+    </div>
+
+    </div>
+<!--   end of 6th recommendation   -->
+
+<!---->
+
+
+    </div>
+</div>
 {% endblock %}

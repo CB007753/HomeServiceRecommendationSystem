@@ -100,7 +100,6 @@ class CityEngine:
 
     # function that takes in the work of service provider as input and returns the top 5 recommended service providers
     def recommendations(City_of_work, cosine_sim=cosine_sim):
-        import pandas as pd
         recommended_city = []
         recommended_id = []
         recommended_name = []
@@ -109,7 +108,7 @@ class CityEngine:
         recommend = []
         indices = CityEngine.indices
         ds = CityEngine.ds
-        # gettin the index of the service providers that matches the work
+        # getting the index of the service providers that matches the work
         idx = indices[indices == City_of_work].index[0]
 
         # creating a Series with the similarity scores in descending order
@@ -117,6 +116,83 @@ class CityEngine:
 
         # getting the indexes of the 5 most similar service providers
         top_5_indexes = list(score_series.iloc[1:11].index)
+
+        # populating the list with the name,city,work and experience of the best 5 matching service providers
+        for i in top_5_indexes:
+            recommended_city.append(list(ds['City_of_work'])[i])
+            recommended_name.append(list(ds['Name'])[i])
+            recommended_work.append(list(ds['Work'])[i])
+            recommended_exp.append(list(ds['Years of Experience'])[i])
+            recommended_id.append(list(ds['ID'])[i])
+
+            recommend = recommended_id, recommended_name, recommended_city, recommended_work, recommended_exp
+
+        return recommend
+
+
+class WorkEngine:
+    ds = pd.read_csv("E:\Final_Year_Project\Assignment\Recommendation_App\plumbers_dataset.csv")
+    ds = ds[["ID", "Name", "Telephone", "City_of_work", "Work", "Years of Experience", "Age Group", "NVQ Level"]]
+    ds = ds.rename({"ConvertedComp": "Plumbers"}, axis=1)
+
+    x = ds.Work
+    y = ds['Years of Experience']
+
+    # Data preprocessing
+    # Function for removing NonAscii characters
+    def _removeNonAscii(s):
+        return "".join(i for i in s if ord(i) < 128)
+
+    # Function for converting into lower case
+    def make_lower_case(text):
+        return text.lower()
+
+    # Function for removing stop words(eg:'is','the', etc..)
+    def remove_stop_words(text):
+        text = text.split()
+        stops = set(stopwords.words("english"))
+        text = [w for w in text if not w in stops]
+        text = " ".join(text)
+        return text
+
+    # Applying all the functions in description and storing as a cleaned_desc
+    ds['cleaned_work'] = ds['Work'].apply(_removeNonAscii)
+    ds['cleaned_work'] = ds.cleaned_work.apply(func=make_lower_case)
+    ds['cleaned_work'] = ds.cleaned_work.apply(func=remove_stop_words)
+
+    from sklearn.feature_extraction.text import CountVectorizer
+    # instantiating and generating the count matrix
+    count = CountVectorizer()
+    count_matrix = count.fit_transform(ds['cleaned_work'])
+
+    # creating a Series for the Service Provider Names so they are associated to an ordered numerical
+    # list which I will use later to match the indexes
+    indices = pd.Series(ds.Work)
+
+    from sklearn.metrics.pairwise import cosine_similarity
+
+    # generating the cosine similarity matrix
+    cosine_sim = cosine_similarity(count_matrix, count_matrix)
+
+    # function that takes in the work of service provider as input and returns the top 5 recommended service providers
+    def recommendations(Work, cosine_sim=cosine_sim):
+        recommended_city = []
+        recommended_name = []
+        recommended_work = []
+        recommended_exp = []
+        recommended_id = []
+        recommend = []
+
+        indices = WorkEngine.indices
+        ds = WorkEngine.ds
+        # getting the index of the service providers that matches the work
+        idx = indices[indices == Work].index[0]
+
+        # creating a Series with the similarity scores in descending order
+        score_series = pd.Series(cosine_sim[idx]).sort_values(ascending=False)
+
+        # getting the indexes of the 5 most similar service providers
+        top_5_indexes = list(score_series.iloc[1:7].index)
 
         # populating the list with the name,city,work and experience of the best 5 matching service providers
         for i in top_5_indexes:
