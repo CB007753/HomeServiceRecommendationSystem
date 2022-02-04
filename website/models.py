@@ -15,6 +15,8 @@ class User(db.Model, UserMixin):
     address = db.Column(db.String(300))
     notes = db.relationship('Note')
     hired_user = db.relationship('HiredUser')
+    hired_history = db.relationship('HiredHistory')
+    review = db.relationship('Review')
 
 
 class HiredUser(db.Model):
@@ -57,6 +59,17 @@ class Plumbers(db.Model):
     years_of_experience = db.Column(db.Integer)
     age_group = db.Column(db.String(150))
     nvq_level = db.Column(db.String(150))
+    review = db.relationship('Review')
+
+
+class Review(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150))
+    message = db.Column(db.String(500))
+    date = db.Column(db.String(150))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    plumber_id = db.Column(db.Integer, db.ForeignKey('plumbers.id'))
+    hired_date = db.Column(db.String(150))
 
 
 class CityEngine:

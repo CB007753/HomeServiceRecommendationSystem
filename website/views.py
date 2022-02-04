@@ -289,14 +289,43 @@ def hired_history():
 @views.route('/details-of-hired-plumber-history/<int:record_id>', methods=['GET', 'POST'])
 @login_required
 def view_hired_plumber_history_details(record_id):
-    from .models import Plumbers, HiredHistory
+    from .models import Plumbers, HiredHistory, Review
+    import datetime
 
+    now = datetime.datetime.now()
     status_of_hired_plumber = HiredHistory.query.get(record_id)
     plumber_id = status_of_hired_plumber.plumber_id
+    user_id = current_user.id
+    hired_date = status_of_hired_plumber.date
+
+    user_exist = Review.query.filter_by(user_id=user_id, plumber_id=plumber_id, hired_date=hired_date).first()
+
+    if user_exist:
+        existence = 'true'
+    else:
+        existence = 'false'
 
     details_of_hired_plumber = Plumbers.query.get(plumber_id)
+    try:
+        if request.method == 'POST':
+            message = request.form.get('message')
+
+            user_name = current_user.fullname
+            formatted_date = now.strftime("%B %d, %Y")
+
+            from . import db
+            new_review = Review(name=user_name, message=message, date=formatted_date,
+                                user_id=user_id, plumber_id=plumber_id, hired_date=hired_date)
+            db.session.add(new_review)
+            db.session.commit()
+            flash("Review Added !", category="success")
+            return redirect(url_for('views.view_hired_plumber_history_details', record_id=record_id))
+
+    except Exception as e:
+        flash("Something went wrong !", category="error")
+        print(e)
     return render_template("view_details_hired_plumber_history.html", user=current_user,
-                           plumber=details_of_hired_plumber, hired_plumber=status_of_hired_plumber)
+                           plumber=details_of_hired_plumber, hired_plumber=status_of_hired_plumber, existence=existence)
 
 
 @views.route('/recommend-based-on-city', methods=['GET', 'POST'])
@@ -334,3 +363,5 @@ def recommend_based_on_city():
                            plumber_5=recommended_plumber_5, plumber_6=recommended_plumber_6,
                            plumber_7=recommended_plumber_7, plumber_8=recommended_plumber_8,
                            plumber_9=recommended_plumber_9, plumber_10=recommended_plumber_10)
+
+
