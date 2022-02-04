@@ -3,7 +3,7 @@
 {% block content %}
 
 <div align="center" style="background-color: #ECFFDC">
-{% if hired!=null %}
+
      <h1 class="card-header text-white bg-secondary">Your Current Hiring</h1>
 
   <br>
@@ -12,7 +12,7 @@
 
 {% for plumber in hired %}
     {% if plumber.user_id==user.id  %}
-  <div class="card" style="border-radius: 20px; border-color: yellowgreen">
+  <div class="card shadow-lg" style="border-radius: 20px; border-color: yellowgreen">
 
     <div align="center">
           <img src="https://www.proxims-barcelona.com/wp-content/uploads/2021/06/plumber.jpg" style="width: 300px; height: 200px; padding-top: 5px; border-radius: 15px" class="card-img-top" alt="...">
@@ -39,11 +39,7 @@
   </div>
     {% endif %}
     {% endfor %}
-    {% else %}
 
-    <h1 class="card-header text-white bg-secondary">Your Current Hiring Is Empty</h1>
-
-    {% endif %}
 
 </div>
 <br>

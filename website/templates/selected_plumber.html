@@ -3,7 +3,7 @@
 
 {% block content %}
 <h3 class="card-header text-white bg-secondary">Confirm Your Hiring (You can't revert after hiring)</h3>
-<div class="container emp-profile" style="padding-top: 30px">
+<div class="container emp-profile shadow-lg" style="padding-top: 30px">
             <form method="post">
                 <div class="row">
 
@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <a href="{{ url_for('views.hire_me', record_id = plumber_id) }}" class="btn btn-warning" style="border-radius: 15px">Hire Me</a>
+                        <a href="{{ url_for('views.hire_me', record_id = plumber_id) }}" class="btn btn-warning shadow-lg" style="border-radius: 15px">Hire Me</a>
                     </div>
 
                 </div>
@@ -101,6 +101,46 @@
                                             </div>
                                         </div>
                                 {% endif %}
+
+
+<!--all reviews                                 -->
+    <hr style="height: 5px">
+
+      {% if plumber.review %}
+<h4 style="font-family: 'Dubai Medium',sans-serif">Customer Reviews</h4>
+
+                {% for r in plumber.review|sort(attribute='id', reverse = True)%}
+
+                 <section style="background-color: inherit;">
+        <div class="card shadow-lg" style="border-color: greenyellow; border-radius: 20px">
+          <div class="card-body">
+            <div class="d-flex flex-start align-items-center">
+
+              <div>
+                <h6 class="fw-bold text-primary mb-1">{{ r.name }}</h6>
+                <p class="text-muted small mb-0">
+                  Shared publicly - {{ r.date }}
+                </p>
+              </div>
+            </div>
+
+            <p class="mt-3 mb-4 pb-2">
+                {{ r.message }}
+            </p>
+
+
+          </div>
+
+        </div>
+
+</section>
+<br>
+
+
+                         {% endfor %}
+                                {% endif %}
+<!--end of all reviews                                          -->
+
                             </div>
 
                         </div>
@@ -130,7 +170,7 @@
 
         <!--    1st recommendation  -->
   <div class="col">
-    <div class="card bg-secondary text-white h-100" style="width: 360px; border-radius: 30px">
+    <div class="card bg-secondary text-white h-100 shadow-lg" style="width: 360px; border-radius: 30px">
 
 
       <h5 class="card-header bg-dark" style="border-radius: 30px"><b>{{ rec_plumber_1.name }}</b></h5>
@@ -160,7 +200,7 @@
 
 <!--    2nd recommendation  -->
   <div class="col">
-    <div class="card bg-secondary text-white h-100" style="width: 360px; border-radius: 30px">
+    <div class="card bg-secondary text-white h-100 shadow-lg" style="width: 360px; border-radius: 30px">
 
 
       <h5 class="card-header bg-dark" style="border-radius: 30px"><b>{{ rec_plumber_2.name }}</b></h5>
@@ -190,7 +230,7 @@
 
 <!--    3rd recommendation  -->
   <div class="col">
-    <div class="card bg-secondary text-white h-100" style="width: 360px; border-radius: 30px">
+    <div class="card bg-secondary text-white h-100 shadow-lg" style="width: 360px; border-radius: 30px">
 
 
       <h5 class="card-header bg-dark" style="border-radius: 30px"><b>{{ rec_plumber_3.name }}</b></h5>
@@ -220,7 +260,7 @@
 
  <!--    4th recommendation  -->
   <div class="col">
-    <div class="card bg-secondary text-white h-100" style="width: 360px; border-radius: 30px">
+    <div class="card bg-secondary text-white h-100 shadow-lg" style="width: 360px; border-radius: 30px">
 
 
       <h5 class="card-header bg-dark" style="border-radius: 30px"><b>{{ rec_plumber_4.name }}</b></h5>
@@ -250,7 +290,7 @@
 
   <!--    5th recommendation  -->
   <div class="col">
-    <div class="card bg-secondary text-white h-100" style="width: 360px; border-radius: 30px">
+    <div class="card bg-secondary text-white h-100 shadow-lg" style="width: 360px; border-radius: 30px">
 
 
       <h5 class="card-header bg-dark" style="border-radius: 30px"><b>{{ rec_plumber_5.name }}</b></h5>
@@ -280,7 +320,7 @@
 
 <!--    6th recommendation  -->
   <div class="col">
-    <div class="card bg-secondary text-white h-100" style="width: 360px; border-radius: 30px">
+    <div class="card bg-secondary text-white h-100 shadow-lg" style="width: 360px; border-radius: 30px">
 
 
       <h5 class="card-header bg-dark" style="border-radius: 30px"><b>{{ rec_plumber_6.name }}</b></h5>

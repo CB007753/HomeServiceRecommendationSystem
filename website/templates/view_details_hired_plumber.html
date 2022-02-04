@@ -8,7 +8,7 @@
 {% else %}
 <h3 class="card-header text-white bg-secondary">Details Of Hired Plumber</h3>
 {% endif %}
-<div class="container emp-profile" style="padding-top: 30px">
+<div class="container emp-profile shadow-lg" style="padding-top: 30px">
             <form method="post">
                 <div class="row">
 
@@ -33,11 +33,11 @@
                     </div>
                 {% if hired_plumber.status=='Completed' %}
                     <div class="col-md-2">
-                        <a href="/hired-history" class="btn btn-warning" style="border-radius: 15px">Go Back</a>
+                        <a href="/hired-history" class="btn btn-warning shadow-lg" style="border-radius: 15px">Go Back</a>
                     </div>
                 {% else %}
                     <div class="col-md-2">
-                        <a href="/current-hiring" class="btn btn-warning" style="border-radius: 15px">Go Back</a>
+                        <a href="/current-hiring" class="btn btn-warning shadow-lg" style="border-radius: 15px">Go Back</a>
                     </div>
                 {% endif %}
                 </div>
