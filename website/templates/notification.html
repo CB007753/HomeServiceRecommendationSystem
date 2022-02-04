@@ -2,9 +2,8 @@
 {% block title %}Notification{% endblock %}
 {% block content %}
 
-
-
-<h1 align="center">Notification</h1>
+<h1 align="center" class="card-header text-white bg-secondary">Notification</h1>
+<br>
 <ul class="list-group list-group-flush " id="notes">
 
   {% for note in user.notes|sort(attribute='id', reverse = True) %}
