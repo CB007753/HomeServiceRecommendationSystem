@@ -134,7 +134,7 @@ class CityEngine:
         # creating a Series with the similarity scores in descending order
         score_series = pd.Series(cosine_sim[idx]).sort_values(ascending=False)
 
-        # getting the indexes of the 5 most similar service providers
+        # getting the indexes of the 10 most similar service providers
         top_5_indexes = list(score_series.iloc[1:11].index)
 
         # populating the list with the name,city,work and experience of the best 5 matching service providers
@@ -211,8 +211,8 @@ class WorkEngine:
         # creating a Series with the similarity scores in descending order
         score_series = pd.Series(cosine_sim[idx]).sort_values(ascending=False)
 
-        # getting the indexes of the 5 most similar service providers
-        top_5_indexes = list(score_series.iloc[1:7].index)
+        # getting the indexes of the 15 most similar service providers
+        top_5_indexes = list(score_series.iloc[1:16].index)
 
         # populating the list with the name,city,work and experience of the best 5 matching service providers
         for i in top_5_indexes:
