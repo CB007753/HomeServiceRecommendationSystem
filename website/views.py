@@ -375,6 +375,7 @@ def recommend_based_on_city():
 def recommend_based_on_interest():
     try:
         import sqlite3
+        from .models import Plumbers,UserInterest
 
         con = sqlite3.connect("E:\Final_Year_Project\Assignment\website\database.db")
         print("Database opened successfully")
@@ -383,46 +384,52 @@ def recommend_based_on_interest():
             'SELECT interest , COUNT(interest) AS MOST_FREQUENT FROM user_interest WHERE user_id={}'
             ' GROUP BY interest ORDER BY COUNT(interest)DESC'.format(current_user.id))
 
-        for row in my_cursor:
-            # this prints the most occurring value and the number of occurrence
-            print(row)
-            from .models import WorkEngine
-            loaded_engine = WorkEngine.recommendations
-            from .models import Plumbers
-            work = row[0]
-            id_1 = loaded_engine(work)[0][0]
-            id_2 = loaded_engine(work)[0][1]
-            id_3 = loaded_engine(work)[0][2]
-            id_4 = loaded_engine(work)[0][3]
-            id_5 = loaded_engine(work)[0][4]
-            id_6 = loaded_engine(work)[0][5]
-            id_7 = loaded_engine(work)[0][6]
-            id_8 = loaded_engine(work)[0][7]
-            id_9 = loaded_engine(work)[0][8]
-            id_10 = loaded_engine(work)[0][9]
-            id_11 = loaded_engine(work)[0][10]
-            id_12 = loaded_engine(work)[0][11]
+        user_exist = UserInterest.query.filter_by(user_id=current_user.id).first()
 
-            recommended_plumber_1 = Plumbers.query.get(id_1)
-            recommended_plumber_2 = Plumbers.query.get(id_2)
-            recommended_plumber_3 = Plumbers.query.get(id_3)
-            recommended_plumber_4 = Plumbers.query.get(id_4)
-            recommended_plumber_5 = Plumbers.query.get(id_5)
-            recommended_plumber_6 = Plumbers.query.get(id_6)
-            recommended_plumber_7 = Plumbers.query.get(id_7)
-            recommended_plumber_8 = Plumbers.query.get(id_8)
-            recommended_plumber_9 = Plumbers.query.get(id_9)
-            recommended_plumber_10 = Plumbers.query.get(id_10)
-            recommended_plumber_11 = Plumbers.query.get(id_11)
-            recommended_plumber_12 = Plumbers.query.get(id_12)
+        if user_exist:
+            for row in my_cursor:
+                # this prints the most occurring value and the number of occurrence
+                print(row)
+                from .models import WorkEngine
+                loaded_engine = WorkEngine.recommendations
+                work = row[0]
+                id_1 = loaded_engine(work)[0][0]
+                id_2 = loaded_engine(work)[0][1]
+                id_3 = loaded_engine(work)[0][2]
+                id_4 = loaded_engine(work)[0][3]
+                id_5 = loaded_engine(work)[0][4]
+                id_6 = loaded_engine(work)[0][5]
+                id_7 = loaded_engine(work)[0][6]
+                id_8 = loaded_engine(work)[0][7]
+                id_9 = loaded_engine(work)[0][8]
+                id_10 = loaded_engine(work)[0][9]
+                id_11 = loaded_engine(work)[0][10]
+                id_12 = loaded_engine(work)[0][11]
 
-            return render_template("recommendation_based_on_interest.html", user=current_user,
-                                   plumber_1=recommended_plumber_1, plumber_2=recommended_plumber_2,
-                                   plumber_3=recommended_plumber_3, plumber_4=recommended_plumber_4,
-                                   plumber_5=recommended_plumber_5, plumber_6=recommended_plumber_6,
-                                   plumber_7=recommended_plumber_7, plumber_8=recommended_plumber_8,
-                                   plumber_9=recommended_plumber_9, plumber_10=recommended_plumber_10,
-                                   plumber_11=recommended_plumber_11, plumber_12=recommended_plumber_12)
+                recommended_plumber_1 = Plumbers.query.get(id_1)
+                recommended_plumber_2 = Plumbers.query.get(id_2)
+                recommended_plumber_3 = Plumbers.query.get(id_3)
+                recommended_plumber_4 = Plumbers.query.get(id_4)
+                recommended_plumber_5 = Plumbers.query.get(id_5)
+                recommended_plumber_6 = Plumbers.query.get(id_6)
+                recommended_plumber_7 = Plumbers.query.get(id_7)
+                recommended_plumber_8 = Plumbers.query.get(id_8)
+                recommended_plumber_9 = Plumbers.query.get(id_9)
+                recommended_plumber_10 = Plumbers.query.get(id_10)
+                recommended_plumber_11 = Plumbers.query.get(id_11)
+                recommended_plumber_12 = Plumbers.query.get(id_12)
+
+                return render_template("recommendation_based_on_interest.html", user=current_user,
+                                       plumber_1=recommended_plumber_1, plumber_2=recommended_plumber_2,
+                                       plumber_3=recommended_plumber_3, plumber_4=recommended_plumber_4,
+                                       plumber_5=recommended_plumber_5, plumber_6=recommended_plumber_6,
+                                       plumber_7=recommended_plumber_7, plumber_8=recommended_plumber_8,
+                                       plumber_9=recommended_plumber_9, plumber_10=recommended_plumber_10,
+                                       plumber_11=recommended_plumber_11, plumber_12=recommended_plumber_12)
+        else:
+            flash("You haven\'t hired any plumber yet, start hiring more plumbers to find your interest",
+                  category="error")
+            return redirect(url_for("views.plumbers"))
     except Exception as e:
         print(e)
         flash("Something went wrong", category="error")
