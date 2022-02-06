@@ -233,7 +233,7 @@ def update_arrived(record_id):
 @login_required
 def work_completed(record_id):
     try:
-        from .models import HiredUser, HiredHistory, Note
+        from .models import HiredUser, HiredHistory, Note, UserInterest
         details_of_hired_plumber = HiredUser.query.get(record_id)
 
         name = details_of_hired_plumber.name
@@ -255,6 +255,11 @@ def work_completed(record_id):
             new_entry = HiredHistory(name=name, telephone=telephone, work=work, status=status,
                                      user_id=user_id, plumber_id=plumber_id, date=formated_date)
             db.session.add(new_entry)
+            db.session.commit()
+
+            # Adding user interest
+            new_interest = UserInterest(user_id=user_id, interest=work)
+            db.session.add(new_interest)
             db.session.commit()
 
             # Deleting the hiring from hired user table so the user can hire another service provider.

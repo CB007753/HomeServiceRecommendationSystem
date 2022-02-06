@@ -17,6 +17,7 @@ class User(db.Model, UserMixin):
     hired_user = db.relationship('HiredUser')
     hired_history = db.relationship('HiredHistory')
     review = db.relationship('Review')
+    interest = db.relationship('UserInterest')
 
 
 class HiredUser(db.Model):
@@ -70,6 +71,12 @@ class Review(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     plumber_id = db.Column(db.Integer, db.ForeignKey('plumbers.id'))
     hired_date = db.Column(db.String(150))
+
+
+class UserInterest(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    interest = db.Column(db.String(150))
 
 
 class CityEngine:
