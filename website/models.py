@@ -128,7 +128,7 @@ class CityEngine:
         recommend = []
         indices = CityEngine.indices
         ds = CityEngine.ds
-        # getting the index of the service providers that matches the work
+        # getting the index of the service providers that matches the city
         idx = indices[indices == City_of_work].index[0]
 
         # creating a Series with the similarity scores in descending order
