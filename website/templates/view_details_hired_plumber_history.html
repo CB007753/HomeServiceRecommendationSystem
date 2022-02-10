@@ -88,7 +88,7 @@
 
                                 <div class="row">
                                             <div class="col-md-6">
-                                                <label><b>Hired Date and Time</b></label>
+                                                <label><b>Hiring Completed Date and Time</b></label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>{{ hired_plumber.date }}</p>
@@ -119,6 +119,8 @@
                   name="message"
                   rows="4"
                   required
+                  minlength="5"
+                  maxlength="300"
                   style="border-radius: 25px"
                 ></textarea>
 

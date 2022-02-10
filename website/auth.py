@@ -44,8 +44,8 @@ def sign_up():
             flash('Email is already taken, try another email.', category='error')
         elif len(fullname) < 3:
             flash('Full name must be greater than 2 characters.', category='error')
-        elif len(email) < 4:
-            flash('Email must be greater than 3 characters.', category='error')
+        elif len(email) < 6:
+            flash('Email must be greater than 5 characters.', category='error')
         elif len(address) < 10:
             flash('Address is too short.', category='error')
         elif len(password1) < 7:
@@ -68,4 +68,5 @@ def sign_up():
 @login_required
 def logout():
     logout_user()
+    flash('You have been logged out from our application.', category='success')
     return redirect(url_for('auth.login'))
