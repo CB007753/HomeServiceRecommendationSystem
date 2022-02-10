@@ -406,7 +406,7 @@ def recommend_based_on_city():
 def recommend_based_on_interest():
     try:
         import sqlite3
-        from .models import Plumbers,UserInterest
+        from .models import Plumbers, UserInterest
 
         con = sqlite3.connect("E:\Final_Year_Project\Assignment\website\database.db")
         print("Database opened successfully")
